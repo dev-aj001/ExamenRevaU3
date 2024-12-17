@@ -21,7 +21,7 @@ const columns = [
 const UsersTable = () => {
 
     const [loadingTable, setLoadingTable] = useState(true);
-    const [rowSelectionInventories, setRowSelectionInventories] = useState({});
+    const [rowSelection, setRowSelection] = useState({});
     const [usersData, setUsersData] = useState([]);
 
     const fetchUsers = async () => {
@@ -35,13 +35,81 @@ const UsersTable = () => {
     }
 
     useEffect(() => {
-        fetchData();
+        fetchUsers();
     }, []);
-
 
     return (
         <Box>
+            <MaterialReactTable
+                columns={columns}
+                data={usersData}
+                state={{
+                    isLoading: loadingTable,
+                    rowSelection
+                }}
+                onRowSelectionChange={setRowSelection}
+                initialState={{ density: "compact", showGlobalFilter: true }}
+                enableRowSelection={true}
 
+                renderTopToolbarCustomActions={() => (
+                    <Stack direction="row" sx={{ m: 1 }}>
+
+
+                        <Tooltip title="Agregar">
+                            <IconButton onClick={() => setAddInventoryShowModal(true)}>
+                                <AddCircleIcon />
+                            </IconButton>
+                        </Tooltip>
+
+                        <Tooltip title="Editar">
+                            <IconButton
+                                onClick={() => {
+                                    const selectedData = Object.keys(rowSelectionInventories).map((key) => inventoriesData[key]);
+
+                                    if (selectedData.length !== 1) {
+                                        alert("Por favor, seleccione una sola fila para editar.");
+                                        return;
+                                    }
+
+                                    // Pasa solo el ID del inventario seleccionado al modal de actualización
+                                    setUpdateInventoryShowModal(true);
+                                    setSelectedInventory(selectedData[0]);  // Guardamos el inventario seleccionado
+                                }}
+                            >
+                                <EditIcon />
+                            </IconButton>
+                        </Tooltip>
+
+                        <Tooltip title="Eliminar">
+                            <IconButton onClick={() => {
+                                const selectedData = Object.keys(rowSelectionInventories).map((key) => inventoriesData[key]);
+
+
+
+                                // Pasa solo el ID del inventario seleccionado al modal de actualización
+                                setDeleteInventoryShowModal(true);
+                                setSelectedInventory(selectedData);  // Guardamos el inventario seleccionado
+                            }}>
+                                <DeleteIcon />
+                            </IconButton>
+                        </Tooltip>
+
+                        <Tooltip title="Detalles">
+                            <IconButton onClick={() => {
+                                const selectedData = Object.keys(rowSelectionInventories).map((key) => inventoriesData[key]);
+
+
+
+                                // Pasa solo el ID del inventario seleccionado al modal de actualización
+                                setDetailsInventoryShowModal(true);
+                                setSelectedInventory(selectedData);  // Guardamos el inventario seleccionado
+                            }}>
+                                <InfoIcon />
+                            </IconButton>
+                        </Tooltip>
+                    </Stack>
+                )}
+            />
         </Box>
     )
 

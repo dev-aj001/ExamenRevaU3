@@ -4,7 +4,7 @@ import UserTable from "../tables/UsersTable";
 const UsersTab = () => {
     return (
         <Box>
-            <InventoriesTable/>
+            <UserTable/>
         </Box>
     );
 };
