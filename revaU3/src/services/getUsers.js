@@ -7,7 +7,7 @@ export const getUsers = async () => {
         
         axios.get(apiUrl)
           .then((response) => {
-            const data = response.data;
+            const data = response.data.data;
             console.log(data);
             resolve(data);
           })

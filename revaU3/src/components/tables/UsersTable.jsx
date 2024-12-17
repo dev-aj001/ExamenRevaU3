@@ -5,7 +5,6 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import EditIcon from "@mui/icons-material/Edit";
 import InfoIcon from "@mui/icons-material/Info";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Tabs, Tab } from "@mui/material";
 
 import { getUsers } from "../../services/getUsers";
 
@@ -27,6 +26,7 @@ const UsersTable = () => {
     const fetchUsers = async () => {
         try {
             const users = await getUsers();
+            console.log(users);
             setUsersData(users);
             setLoadingTable(false);
         } catch (error) {
