@@ -30,8 +30,10 @@ const AddUserModal = ({ showAddModal, setShowAddModal, onInventoryAdded, fetchDa
             setMensajeExitoAlert(null);
             setLoading(true);
             try {
+                console.log(values);
                 const response = await postUser(values);
-                if (response && ![200, 201].includes(response.status)) {
+                console.log(response);
+                if (!response.name) {
                     throw new Error(response.data?.message || "Error al crear usuario");
                 }
 

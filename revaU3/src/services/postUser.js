@@ -8,7 +8,6 @@ export const postUser = async (user) => {
         axios.post(apiUrl, user)
           .then((response) => {
             const data = response.data;
-            console.log(data);
             resolve(data);
           })
           .catch((error) => {
