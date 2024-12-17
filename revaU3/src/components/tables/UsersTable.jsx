@@ -80,7 +80,9 @@ const UsersTable = () => {
                                     }
 
                                     // Pasa solo el ID del inventario seleccionado al modal de actualización
+                                    console.log(updateUserShowModal);
                                     setUpdateUserShowModal(true);
+                                    console.log(updateUserShowModal);
                                     setSelectedUser(selectedData[0]);  // Guardamos el inventario seleccionado
                                 }}
                             >
@@ -131,7 +133,7 @@ const UsersTable = () => {
             setShowUpdateModal={setUpdateUserShowModal}
             selectedUbicaciones={selectedUser} // Pasa el inventario seleccionado
             fetchData={fetchUsers}
-            onClose={() => setUpdateUbicacionesShowModal(false)}
+            onClose={() => setUpdateUserShowModal(false)}
         />
         </Box>
     )

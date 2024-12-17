@@ -12,6 +12,8 @@ import * as Yup from "yup";
 import { putUser } from "../../services/putUser";
 
 const EditUserModal = ({ showAddModal, setShowAddModal, fetchData, selectedUser }) => {
+
+
     const [mensajeErrorAlert, setMensajeErrorAlert] = useState("");
     const [mensajeExitoAlert, setMensajeExitoAlert] = useState("");
     const [Loading, setLoading] = useState(false);
