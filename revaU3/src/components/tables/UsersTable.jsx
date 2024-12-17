@@ -9,6 +9,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { getUsers } from "../../services/getUsers";
 
 import AddUserModal from "../modals/addUserModal";
+import EditUserModal from "../modals/editUserModal";
 
 
 const columns = [
@@ -24,7 +25,11 @@ const UsersTable = () => {
     const [loadingTable, setLoadingTable] = useState(true);
     const [rowSelection, setRowSelection] = useState({});
     const [usersData, setUsersData] = useState([]);
+
     const [addUserShowModal, setAddUserShowModal] = useState(false);
+    const [updateUserShowModal, setUpdateUserShowModal] = useState(false);
+
+    const [selectedUser, setSelectedUser] = useState(null);
 
     const fetchUsers = async () => {
         try {
@@ -67,8 +72,8 @@ const UsersTable = () => {
                         <Tooltip title="Editar">
                             <IconButton
                                 onClick={() => {
-                                    const selectedData = Object.keys(rowSelectionInventories).map((key) => inventoriesData[key]);
-
+                                    const selectedData = Object.keys(rowSelection).map((key) => usersData[key]);
+                                    
                                     if (selectedData.length !== 1) {
                                         alert("Por favor, seleccione una sola fila para editar.");
                                         return;
@@ -119,6 +124,14 @@ const UsersTable = () => {
             setShowAddModal={setAddUserShowModal}
             fetchData={fetchUsers}
             onClose={() => setAddInventoryShowModal(false)}
+        />
+
+        <EditUserModal
+            showUpdateModal={updateUserShowModal}
+            setShowUpdateModal={setUpdateUserShowModal}
+            selectedUbicaciones={selectedUser} // Pasa el inventario seleccionado
+            fetchData={fetchUsers}
+            onClose={() => setUpdateUbicacionesShowModal(false)}
         />
         </Box>
     )
