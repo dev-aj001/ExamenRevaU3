@@ -8,6 +8,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 import { getUsers } from "../../services/getUsers";
 
+import AddUserModal from "../modals/addUserModal";
+
 
 const columns = [
     { accessorKey: "id", header: "ID", size: 150 },
@@ -22,6 +24,7 @@ const UsersTable = () => {
     const [loadingTable, setLoadingTable] = useState(true);
     const [rowSelection, setRowSelection] = useState({});
     const [usersData, setUsersData] = useState([]);
+    const [addUserShowModal, setAddUserShowModal] = useState(false);
 
     const fetchUsers = async () => {
         try {
@@ -56,7 +59,7 @@ const UsersTable = () => {
 
 
                         <Tooltip title="Agregar">
-                            <IconButton onClick={() => setAddInventoryShowModal(true)}>
+                            <IconButton onClick={() => setAddUserShowModal(true)}>
                                 <AddCircleIcon />
                             </IconButton>
                         </Tooltip>
@@ -72,8 +75,8 @@ const UsersTable = () => {
                                     }
 
                                     // Pasa solo el ID del inventario seleccionado al modal de actualización
-                                    setUpdateInventoryShowModal(true);
-                                    setSelectedInventory(selectedData[0]);  // Guardamos el inventario seleccionado
+                                    setUpdateUserShowModal(true);
+                                    setSelectedUser(selectedData[0]);  // Guardamos el inventario seleccionado
                                 }}
                             >
                                 <EditIcon />
@@ -87,8 +90,8 @@ const UsersTable = () => {
 
 
                                 // Pasa solo el ID del inventario seleccionado al modal de actualización
-                                setDeleteInventoryShowModal(true);
-                                setSelectedInventory(selectedData);  // Guardamos el inventario seleccionado
+                                setDeleteUserShowModal(true);
+                                setSelectedUser(selectedData);  // Guardamos el inventario seleccionado
                             }}>
                                 <DeleteIcon />
                             </IconButton>
@@ -101,8 +104,8 @@ const UsersTable = () => {
 
 
                                 // Pasa solo el ID del inventario seleccionado al modal de actualización
-                                setDetailsInventoryShowModal(true);
-                                setSelectedInventory(selectedData);  // Guardamos el inventario seleccionado
+                                setDetailsUserShowModal(true);
+                                setSelectedUser(selectedData);  // Guardamos el inventario seleccionado
                             }}>
                                 <InfoIcon />
                             </IconButton>
@@ -110,6 +113,13 @@ const UsersTable = () => {
                     </Stack>
                 )}
             />
+
+        <AddUserModal
+            showAddModal={addUserShowModal}
+            setShowAddModal={setAddUserShowModal}
+            fetchData={fetchUsers}
+            onClose={() => setAddInventoryShowModal(false)}
+        />
         </Box>
     )
 
